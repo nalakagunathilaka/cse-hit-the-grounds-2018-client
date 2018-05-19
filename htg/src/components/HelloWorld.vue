@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-slide-y-transition mode="out-in">
       <v-layout column align-center>
-        <img src="@/assets/logo.png" alt="Vuetify.js" class="mb-5">
+        <img src="@/assets/finalfinal.png" alt="Vuetify.js" class="mb-5" style="width: 300px; height: 300px;">
 
         <v-flex xs12>
           <v-card>
@@ -13,7 +13,10 @@
             </v-card-title>
             <v-card-actions>
               <v-layout row wrap>
-                <v-flex xs6>
+                <v-alert v-show="matches.length == 0" type="info">
+                  Currently there are no live matches.
+                </v-alert>
+                <v-flex xs6 v-for="(item,index) in matches" :key=item.matchid>
                   <v-card flat>
                     <v-container
                       fixed
@@ -25,16 +28,16 @@
                           <v-card>
                             <v-card-title primary-title>
                               <div>
-                                <span><h2 class="display-1">{{team1}} vs {{team2}}</h2></span><br>
+                                <span><h2 class="display-1">{{item.team1}} vs {{item.team2}}</h2></span><br>
                                 <v-layout row>
-                                  <span><h3>{{team1}} - {{score1}} / {{wick1}}</h3></span><br>
+                                  <span><h3>{{item.team1}} - {{item.score1}} / {{item.wick1}}</h3></span><br>
                                   <v-spacer></v-spacer>
-                                  <span>Overs: {{overs}}</span>
+                                  <span>Overs: {{item.overs}}</span>
                                 </v-layout>
                                 <v-layout row>
-                                  <span><h3>{{team2}} - {{score2}} / {{wick2}}</h3></span><br>
+                                  <span><h3>{{item.team2}} - {{item.score2}} / {{item.wick2}}</h3></span><br>
                                   <v-spacer></v-spacer>
-                                  <span>Overs: {{overs}}</span>
+                                  <span>Overs: {{item.overs}}</span>
                                 </v-layout>
 
                               </div>
@@ -50,6 +53,7 @@
                     </v-container>
                   </v-card>
                 </v-flex>
+
 
               </v-layout>
             </v-card-actions>
@@ -122,12 +126,12 @@
 </template>
 
 <script>
-  let socket = require('socket.io-client')("http://10.10.22.254:3000");
+  let socket = require('socket.io-client')("localhost:3000");
   socket.emit("getTeams", function (err, res) {
     if(err) {return console.log(err)}
     res.forEach((team) => {
       // this.teams.push(team)
-      // console.log(team);
+      console.log(team);
     })
   })
 
@@ -148,7 +152,7 @@
         wick1: 2,
         wick2: 10,
         overs: 6,
-        matches: [],
+        matches: ['lol'],
         scorecard: false,
         headers: [
           // {

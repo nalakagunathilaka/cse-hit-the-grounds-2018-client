@@ -36,7 +36,7 @@
         <!--<v-icon>web</v-icon>-->
       <!--</v-btn>-->
       <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>ball</v-icon>
+        <v-icon></v-icon>
       </v-btn>
 
       <v-toolbar-title v-text="title"></v-toolbar-title>
